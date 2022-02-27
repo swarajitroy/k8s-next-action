@@ -47,6 +47,22 @@ REVISION: 1
 NOTES:
 Thank you for installing HashiCorp Vault!
 
+ubuntu@ip-172-31-22-219:~$ kubectl exec -it vault-0 -- /bin/sh
+/ $ vault status
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        false
+Sealed             true
+Total Shares       0
+Threshold          0
+Unseal Progress    0/0
+Unseal Nonce       n/a
+Version            1.9.2
+Storage Type       file
+HA Enabled         false
+
+
 $ helm get manifest vault
 
 ```
