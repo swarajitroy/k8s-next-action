@@ -1,4 +1,15 @@
 # hashicorp-vault
+---
+
+## A. Install Vault
+---
+
+## B. Initialize Vault
+---
+
+## C. Unseal Vault
+--
+
 
 ```
 ubuntu@ip-172-31-22-219:~/linux-amd64$ helm version
