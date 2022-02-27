@@ -63,6 +63,10 @@ Storage Type       file
 HA Enabled         false
 
 
+ubuntu@ip-172-31-22-219:~$ kubectl get pods  | grep -i vault
+vault-0                                  1/1     Running   0          16h
+vault-agent-injector-58b6d499-c2qqk      1/1     Running   0          16h
+
 $ helm get manifest vault
 
 ```
