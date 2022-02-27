@@ -33,8 +33,21 @@ https://www.vaultproject.io/docs/
 Your release is named vault. To learn more about the release, try:
 
 $ helm status vault
+
+
+ubuntu@ip-172-31-22-219:~$ helm status vault
+NAME: vault
+LAST DEPLOYED: Sat Feb 26 18:10:38 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+Thank you for installing HashiCorp Vault!
+
 $ helm get manifest vault
 
+
+ 
 
 
 ```
