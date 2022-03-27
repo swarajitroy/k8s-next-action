@@ -246,7 +246,47 @@ Services in Kubernetes are the objects that pods use to communicate with each ot
 There are two types of ClusterIP services, Headless Services & Services. Normal Kubernetes services act as load balancers and follow round-robin logic to distribute loads. 
 Headless services don’t act like load balancers.Also, normal services are assigned IPs by Kubernetes whereas Headless services are not. Vault exposes its UI at port 8200. We will use a non-headless service of type NodePort as we want to access this endpoint from outside Kubernetes Cluster.
 
+Create a node port type service on top of vault service.
+
+```
+ubuntu@ip-172-31-22-219:~$ cat vaultNodeport.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: vault
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2022-02-26T18:10:44Z"
+  labels:
+    app.kubernetes.io/instance: vault
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vault
+    helm.sh/chart: vault-0.19.0
+  name: vault
+  namespace: default
+  resourceVersion: "7694312"
+  uid: 66a46f29-e189-4c23-8d6c-5926854800ff
+spec:
+  type: NodePort
+  publishNotReadyAddresses: true
+  ports:
+    - name: http
+      port: 8200
+      targetPort: 8200
+      nodePort: 32000
+    - name: https-internal
+      port: 8201
+      targetPort: 8201
+  selector:
+    app.kubernetes.io/instance: vault
+    app.kubernetes.io/name: vault
+    component: server
+  sessionAffinity: None
 
 
+
+```
+and then access the UI - http://x.y.z.a:32000/ui/vault/secrets and you can initially login with root token created. 
+![alt text](image.jpg)
 
 
