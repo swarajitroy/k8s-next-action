@@ -126,6 +126,8 @@ vault   ClusterIP   10.*.*.*   <none>        8200/TCP,8201/TCP   28d
 
 ```
 
+Agent injector is a kubernetes Mutating Admission Webhook. This controller intercepts pod CREATE and UPDATE requests looking for the metadata annotation vault.hashicorp.com/agent-inject: true in the requests. When found, the controller will inject the init container and the sidecar container. The init container is to pre-populate our secret, and the sidecar container is to keep that secret data in sync throughout our application's life cycle.
+
 ## B. Initialize Vault
 
 ```
