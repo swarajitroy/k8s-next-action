@@ -239,10 +239,12 @@ HA Enabled      false
 ```
 
 ## E. Vault UI
+---
 
-`
 Services in Kubernetes are the objects that pods use to communicate with each other. ClusterIP type services are usually used for inter-pod communication.
-There are two types of ClusterIP services, Headless Services & Services. Normal Kubernetes services act as load balancers and follow round-robin logic to distribute loads. Headless services don’t act like load balancers.Also, normal services are assigned IPs by Kubernetes whereas Headless services are not. Vault exposes its UI at port 8200. We will use a non-headless service of type NodePort as we want to access this endpoint from outside Kubernetes Cluster.
+
+There are two types of ClusterIP services, Headless Services & Services. Normal Kubernetes services act as load balancers and follow round-robin logic to distribute loads. 
+Headless services don’t act like load balancers.Also, normal services are assigned IPs by Kubernetes whereas Headless services are not. Vault exposes its UI at port 8200. We will use a non-headless service of type NodePort as we want to access this endpoint from outside Kubernetes Cluster.
 
 
 
