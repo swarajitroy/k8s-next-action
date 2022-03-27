@@ -5,6 +5,7 @@
 | A | [Install Vault](#a-install-vault) |  Installing Vault via Helm Chart ||
 | B | [Understand the setup](#b-understand-the-setup) |  Vault and Vault Injector ||
 | C | [Initialize Vault](#c-initialize-vault) |  Initialize Vault ||
+| D | [Unseal Vault](#d-unseal-vault) | Unseal Vault ||
 
 
 ## A. Install Vault
