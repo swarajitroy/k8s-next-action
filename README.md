@@ -6,7 +6,7 @@
 | B | [Understand the setup](#b-understand-the-setup) |  Vault and Vault Injector ||
 | C | [Initialize Vault](#c-initialize-vault) |  Initialize Vault ||
 | D | [Unseal Vault](#d-unseal-vault) | Unseal Vault ||
-| E | [Vault UI](#e-vault-ui) ||
+| E | [Vault UI](#e-vault-ui) | Vault UI|
 
 
 ## A. Install Vault
