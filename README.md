@@ -287,6 +287,6 @@ spec:
 
 ```
 and then access the UI - http://x.y.z.a:32000/ui/vault/secrets and you can initially login with root token created. 
-![alt text](image.jpg)
+![Vault UI](https://github.com/swarajitroy/hashicorp-vault/blob/main/hashicorp-vault/vaultui.png)
 
 
