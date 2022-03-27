@@ -187,7 +187,7 @@ HA Enabled         false
 ```
 
 
-## C. Unseal Vault
+## D. Unseal Vault
 
 ```
 
