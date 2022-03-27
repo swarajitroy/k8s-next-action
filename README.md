@@ -71,6 +71,61 @@ $ helm get manifest vault
 
 ```
 
+## B. Understand the setup 
+---
+The configuration of the MutatingWebhookConfiguration tells - the admission controller will try to mutate any POD kubernetes resources for CREATE and UPDATE operations. Then to Mutate - it will consult the web hook - which is running as a service vault-agent-injector-svc
+
+```
+ubuntu@ip-172-31-22-219:~$ kubectl get MutatingWebhookConfiguration
+NAME                       WEBHOOKS   AGE
+vault-agent-injector-cfg   1          28d
+
+ubuntu@ip-172-31-22-219:~$ kubectl  describe MutatingWebhookConfiguration vault-agent-injector-cfg
+
+Webhooks:
+  Admission Review Versions:
+    v1beta1
+    v1
+  Client Config:
+    Ca Bundle:  URS0tLS0tCg==
+    Service:
+      Name:        vault-agent-injector-svc
+      Namespace:   default
+      Path:        /mutate
+      Port:        443
+  Failure Policy:  Ignore
+  Match Policy:    Equivalent
+  Name:            vault.hashicorp.com
+  Namespace Selector:
+  Object Selector:
+  Reinvocation Policy:  Never
+
+ Rules:
+    API Groups:
+
+    API Versions:
+      v1
+    Operations:
+      CREATE
+      UPDATE
+    Resources:
+      pods
+    Scope:          *
+  Side Effects:     None
+  Timeout Seconds:  10
+
+ubuntu@ip-172-31-22-219:~$ kubectl get svc vault-agent-injector-svc
+NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+vault-agent-injector-svc   ClusterIP   10.*.*.*   <none>        443/TCP   28d
+
+ubuntu@ip-172-31-22-219:~$ kubectl get svc vault
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+vault   ClusterIP   10.*.*.*   <none>        8200/TCP,8201/TCP   28d
+
+
+
+```
+
 ## B. Initialize Vault
 
 ```
