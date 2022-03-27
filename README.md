@@ -2,7 +2,7 @@
 
 | ID | Topic | Remarks |
 | ----------- | ----------- | ----------- |
-| 01 | [Install Vault](#a-install-vault) |   ||
+| 01 | [Install Vault](#a-install-vault) |  Installing Vault via Helm Chart ||
 
 
 
