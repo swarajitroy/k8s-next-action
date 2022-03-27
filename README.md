@@ -2,9 +2,9 @@
 
 | ID | Topic | Remarks |
 | ----------- | ----------- | ----------- |
-| 01 | [Install Vault](#a-install-vault) |  Installing Vault via Helm Chart ||
-| 02 | [Understand the setup](#b-understand-the-setup) |  Vault and Vault Injector ||
-
+| A | [Install Vault](#a-install-vault) |  Installing Vault via Helm Chart ||
+| B | [Understand the setup](#b-understand-the-setup) |  Vault and Vault Injector ||
+| C | [Initialize Vault](#b-understand-the-setup) |  Initialize Vault ||
 
 
 ## A. Install Vault
@@ -146,7 +146,7 @@ vault   ClusterIP   10.*.*.*   <none>        8200/TCP,8201/TCP   28d
 
 
 
-## B. Initialize Vault
+## C. Initialize Vault
 
 ```
  $ vault operator init
