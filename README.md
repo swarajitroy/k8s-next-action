@@ -1,6 +1,7 @@
 # K8S Secret Management
 ---
 
-- First item
-  - Second item
-- Third item
+- Fundamentals
+  - Secret Managers  
+    - [Hashicorp Vault](https://github.com/swarajitroy/hashicorp-vault/blob/main/hashicorp-vault/index.md) 
+
