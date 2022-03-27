@@ -2,7 +2,7 @@
 
 | ID | Topic | Remarks |
 | ----------- | ----------- | ----------- |
-| 01 | [Install Vault](https://github.com/swarajitroy/CKS/blob/main/cluster_setup/A01_NetworkPolicy.md) |  https://github.com/ahmetb/kubernetes-network-policy-recipes ||
+| 01 | [Install Vault](#a-install-vault) |   ||
 
 
 
