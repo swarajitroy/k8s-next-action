@@ -291,4 +291,35 @@ spec:
 and then access the UI - http://x.y.z.a:32000/ui/vault/secrets and you can initially login with root token created. 
 ![Vault UI](vaultui.png)
 
+## F. Vault Secret Engine
+---
 
+```
+/ $ vault login
+Token (will be hidden):
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                  Value
+---                  -----
+token                s.gggg
+token_accessor       fff
+token_duration       ∞
+token_renewable      false
+token_policies       ["root"]
+identity_policies    []
+policies             ["root"]
+
+$ vault secrets enable -path=kv-v2 kv-v2
+Success! Enabled the kv-v2 secrets engine at: kv-v2/
+
+ $ vault secrets list
+Path          Type         Accessor              Description
+----          ----         --------              -----------
+cubbyhole/    cubbyhole    cubbyhole_d621d073    per-token private secret storage
+identity/     identity     identity_099eb58f     identity store
+kv-v2/        kv           kv_29f574ed           n/a
+sys/          system       system_1353b5c2       system endpoints used for control, policy and debugging
+
+```
