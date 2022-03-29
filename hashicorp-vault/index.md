@@ -322,4 +322,94 @@ identity/     identity     identity_099eb58f     identity store
 kv-v2/        kv           kv_29f574ed           n/a
 sys/          system       system_1353b5c2       system endpoints used for control, policy and debugging
 
+$ vault kv put kv-v2/database/config username=postgres password=pass123
+Key                Value
+---                -----
+created_time       2022-03-29T17:57:27.526380746Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            1
+
+$vault kv get kv-v2/database/config
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2022-03-29T17:57:35.985186799Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
+
+====== Data ======
+Key         Value
+---         -----
+password    pass123
+username    postgres
+
+```
+## G. Vault Policy 
+---
+
+```
+/ $ vault policy write demo-policy - <<EOF
+> path "kv-v2/data/database/config" {
+>   capabilities = ["read"]
+> }
+> EOF
+Success! Uploaded policy: demo-policy
+
+
+/ $ vault policy read demo-policy
+path "kv-v2/data/database/config" {
+  capabilities = ["read"]
+}
+
+
+```
+
+## H. Vault User 
+---
+
+```
+/ $ vault auth enable userpass
+Success! Enabled userpass auth method at: userpass/
+/ $ vault write auth/userpass/users/batul \
+>     password=foo \
+>     policies=demo-policy
+Success! Data written to: auth/userpass/users/batul
+
+$ vault login -method=userpass username=batul password=foo
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                    Value
+---                    -----
+token                  s.rihqrQoSE7xn3JTME7UEgzpd
+token_accessor         taF8l3FtMRhkw0OnLPkSBQa1
+token_duration         768h
+token_renewable        true
+token_policies         ["default" "demo-policy"]
+identity_policies      []
+policies               ["default" "demo-policy"]
+token_meta_username    batul
+
+/ $ vault kv get kv-v2/database/config
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2022-03-29T17:57:35.985186799Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
+
+====== Data ======
+Key         Value
+---         -----
+password    pass123
+username    postgres
+
+
 ```
