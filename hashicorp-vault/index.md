@@ -449,3 +449,60 @@ ubuntu@ip-172-31-22-219:~$ kubectl create serviceaccount demo-user
 serviceaccount/demo-user created
 ```
 
+```
+
+/ $ vault write -tls-skip-verify auth/kubernetes/login jwt=eyJhbGciOiJSUzI1NiIsImtpZC role=demo-auth
+Key                                       Value
+---                                       -----
+token                                     s.7wG5bH7ZUfO1zvKojdhdcpDS
+token_accessor                            LcYsvaKc9itkbEbGK4IY8u4a
+token_duration                            24h
+token_renewable                           true
+token_policies                            ["default" "demo-policy"]
+identity_policies                         []
+policies                                  ["default" "demo-policy"]
+token_meta_role                           demo-auth
+token_meta_service_account_name           demo-user
+token_meta_service_account_namespace      default
+token_meta_service_account_secret_name    n/a
+token_meta_service_account_uid            f57f3842-85fe-44f1-9093-7f60915e8350
+
+ubuntu@ip-172-31-22-219:~$ kubectl exec -it vault-0 -- /bin/sh
+/ $ vault login
+Token (will be hidden):
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                                       Value
+---                                       -----
+token                                     s.7ojdhdcpDS
+token_accessor                            LcYsv8u4a
+token_duration                            23h58m18s
+token_renewable                           true
+token_policies                            ["default" "demo-policy"]
+identity_policies                         []
+policies                                  ["default" "demo-policy"]
+token_meta_service_account_uid            f57f3842-85fe-44f1-9093-7f60915e8350
+token_meta_role                           demo-auth
+token_meta_service_account_name           demo-user
+token_meta_service_account_namespace      default
+token_meta_service_account_secret_name    n/a
+
+/ $ vault kv get kv-v2/database/config
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2022-03-29T17:57:35.985186799Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            2
+
+====== Data ======
+Key         Value
+---         -----
+password    pass123
+username    postgres
+
+```
