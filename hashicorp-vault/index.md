@@ -447,6 +447,25 @@ Success! Data written to: auth/kubernetes/role/demo-auth
 ```
 ubuntu@ip-172-31-22-219:~$ kubectl create serviceaccount demo-user
 serviceaccount/demo-user created
+
+ubuntu@ip-172-31-22-219:~$ cat demo-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: demo-pod
+  name: demo-pod
+spec:
+  serviceAccountName: demo-user
+  containers:
+  - image: nginx
+    name: demo-pod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
 ```
 
 ```
