@@ -7,4 +7,5 @@
     - [Hashicorp Vault](https://github.com/swarajitroy/hashicorp-vault/blob/main/hashicorp-vault/index.md) 
     - [AWS Secret Manager](https://github.com/swarajitroy/k8s-secret-management/tree/main/aws-secretmanager)
   - [Cryptography](https://github.com/swarajitroy/k8s-secret-management/tree/main/cryptography) 
+  - [K8S Admission Controllers](https://github.com/swarajitroy/k8s-secret-management/tree/main/k8s-admissioncontrollers)
 
