@@ -443,5 +443,14 @@ Success! Data written to: auth/kubernetes/config
 / $ vault write auth/kubernetes/role/demo-auth bound_service_account_names=demo-user bound_service_account_namespaces=default policies=demo-policy ttl=24h
 Success! Data written to: auth/kubernetes/role/demo-auth
 
+```
+
+```
+/ $ vault policy write demo-policy - <<EOF
+> path "demo/data/database/config" {
+>   capabilities = ["read"]
+> }
+> EOF
+Success! Uploaded policy: demo-policy
 
 ```
