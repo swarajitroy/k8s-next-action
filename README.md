@@ -10,4 +10,8 @@
   - [K8S Admission Controllers](https://github.com/swarajitroy/k8s-secret-management/tree/main/k8s-admissioncontrollers)
   - [Container Storage Interface for k8s](https://github.com/swarajitroy/k8s-secret-management/blob/main/k8s-csi/index.md)
   - [Kubernetes Operators](https://github.com/swarajitroy/k8s-secret-management/tree/main/k8s-operator)
-
+- K8S Secret Management Options for applications
+  - Bitnami Sealed Secrets
+  - Hashicorp Vault Agent - Injector
+  - Inject secret Via CSI Driver
+  - External secret Operator
