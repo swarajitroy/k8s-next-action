@@ -369,7 +369,7 @@ path "kv-v2/data/database/config" {
 
 ```
 
-## H. Vault User 
+## H. Vault Authentication - Userpass 
 ---
 
 ```
@@ -415,7 +415,7 @@ username    postgres
 
 ```
 
-## I. Kubernetes Authentication 
+## I. Vault Authentication - Kubernetes  
 ---
 
 ```
