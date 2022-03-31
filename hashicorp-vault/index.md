@@ -413,3 +413,35 @@ username    postgres
 
 
 ```
+
+## I. Kubernetes Authentication 
+---
+
+```
+/ $ vault auth enable kubernetes
+Success! Enabled kubernetes auth method at: kubernetes/
+/ $  vault auth list
+Path           Type          Accessor                    Description
+----           ----          --------                    -----------
+kubernetes/    kubernetes    auth_kubernetes_97bea6af    n/a
+token/         token         auth_token_0a3d32a7         token based credentials
+userpass/      userpass      auth_userpass_4adb1674      n/a
+
+
+```
+
+```
+/ $ vault write auth/kubernetes/config token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" kubernetes_host=https://${KUBERNETES_PORT_443_TCP_ADDR}:443 kubernetes
+_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+Success! Data written to: auth/kubernetes/config
+
+
+```
+
+```
+/ $ vault write auth/kubernetes/role/demo-auth bound_service_account_names=demo-user bound_service_account_namespaces=default policies=demo-policy ttl=24h
+Success! Data written to: auth/kubernetes/role/demo-auth
+
+
+```
