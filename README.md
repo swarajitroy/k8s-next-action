@@ -8,4 +8,5 @@
     - [AWS Secret Manager](https://github.com/swarajitroy/k8s-secret-management/tree/main/aws-secretmanager)
   - [Cryptography](https://github.com/swarajitroy/k8s-secret-management/tree/main/cryptography) 
   - [K8S Admission Controllers](https://github.com/swarajitroy/k8s-secret-management/tree/main/k8s-admissioncontrollers)
+  - [Container Storage Interface for k8s](https://github.com/swarajitroy/k8s-secret-management/blob/main/k8s-csi/index.md)
 
