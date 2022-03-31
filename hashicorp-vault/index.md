@@ -444,13 +444,8 @@ Success! Data written to: auth/kubernetes/config
 Success! Data written to: auth/kubernetes/role/demo-auth
 
 ```
-
 ```
-/ $ vault policy write demo-policy - <<EOF
-> path "demo/data/database/config" {
->   capabilities = ["read"]
-> }
-> EOF
-Success! Uploaded policy: demo-policy
-
+ubuntu@ip-172-31-22-219:~$ kubectl create serviceaccount demo-user
+serviceaccount/demo-user created
 ```
+
