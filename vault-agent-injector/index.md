@@ -97,3 +97,7 @@ metadata: map[created_time:2022-03-29T17:57:35.985186799Z custom_metadata:<nil> 
 ```
 
 Inject one init container named vault-agent-init and one sidecar container named vault-agent, as well as an emptyDir type volume named vault-secrets . Also, the vault-secrets volume is mounted in the init container, the sidecar container, and the app container with the /vault/secrets/ directory. The secret is stored in the vault-secrets volume.
+
+## C. Apply a template to the injected secrets
+---
+The structure of the injected secrets may need to be structured in a way for an application to use. Before writing the secrets to the file system a template can structure the data. To apply this template a new set of annotations need to be applied.
