@@ -55,3 +55,45 @@ ubuntu@ip-172-31-22-219:~$ kubectl get svc vault-agent-injector-svc
 NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 vault-agent-injector-svc   ClusterIP   10.*.*.*   <none>        443/TCP   28d
 ```
+
+## B. Adding annotations to demo pod
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ cat demo-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+     vault.hashicorp.com/agent-inject: 'true'
+     vault.hashicorp.com/role: 'demo-auth'
+     vault.hashicorp.com/agent-inject-secret-database-config.txt: 'kv-v2/data/database/config'
+  creationTimestamp: null
+  labels:
+    run: demo-pod
+  name: demo-pod
+spec:
+  serviceAccountName: demo-user
+  containers:
+  - image: nginx
+    name: demo-pod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
+```
+ubuntu@ip-172-31-22-219:~$ kubectl exec -it demo-pod -- /bin/sh
+Defaulted container "demo-pod" out of: demo-pod, vault-agent, vault-agent-init (init)
+# cd /vault/secrets
+# ls
+database-config.txt
+
+# cat database-config.txt
+data: map[password:pass123 username:postgres]
+metadata: map[created_time:2022-03-29T17:57:35.985186799Z custom_metadata:<nil> deletion_time: destroyed:false version:2]
+
+```
+
+Inject one init container named vault-agent-init and one sidecar container named vault-agent, as well as an emptyDir type volume named vault-secrets . Also, the vault-secrets volume is mounted in the init container, the sidecar container, and the app container with the /vault/secrets/ directory. The secret is stored in the vault-secrets volume.
