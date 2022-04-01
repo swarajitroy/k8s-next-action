@@ -12,6 +12,6 @@
   - [Kubernetes Operators](https://github.com/swarajitroy/k8s-secret-management/tree/main/k8s-operator)
 - K8S Secret Management Options for applications
   - Bitnami Sealed Secrets
-  - Hashicorp Vault Agent - Injector
+  - [Hashicorp Vault Agent - Injector](https://github.com/swarajitroy/k8s-secret-management/blob/main/vault-agent-injector/index.md)
   - Inject secret Via CSI Driver
   - External secret Operator
