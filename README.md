@@ -13,5 +13,5 @@
 - K8S Secret Management Options for applications
   - Bitnami Sealed Secrets
   - [Hashicorp Vault Agent - Injector](https://github.com/swarajitroy/k8s-secret-management/blob/main/vault-agent-injector/index.md)
-  - Inject secret Via CSI Driver
+  - [Inject secret Via CSI Driver](https://github.com/swarajitroy/k8s-secret-management/blob/main/secretstore-csidriver-vault/index.md)
   - External secret Operator
