@@ -64,3 +64,7 @@ No resources found in default namespace.
 
 
 ```
+
+## Craete a SecretProviderClass
+---
+
