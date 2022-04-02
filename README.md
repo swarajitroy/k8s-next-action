@@ -14,4 +14,4 @@
   - Bitnami Sealed Secrets
   - [Hashicorp Vault Agent - Injector](https://github.com/swarajitroy/k8s-secret-management/blob/main/vault-agent-injector/index.md)
   - [Inject secret Via CSI Driver](https://github.com/swarajitroy/k8s-secret-management/blob/main/secretstore-csidriver-vault/index.md)
-  - External secrets Operator
+  - [External secrets Operator](https://github.com/swarajitroy/k8s-next-action/blob/main/external-secrets-operator/index.md)
