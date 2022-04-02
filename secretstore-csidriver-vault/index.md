@@ -53,3 +53,14 @@ Your release is named vault. To learn more about the release, try:
 ## Understand the kubernetes resources created by Secrets Store CSI Driver
 ---
 
+```
+ubuntu@ip-172-31-22-219:~$ kubectl get ds
+NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+csi-secrets-store-csi-driver   1         1         1       1            1           kubernetes.io/os=linux   26m
+vault-csi-provider             1         1         1       1            1           <none>                   7m52s
+
+ubuntu@ip-172-31-22-219:~$ kubectl get SecretProviderClass
+No resources found in default namespace.
+
+
+```
