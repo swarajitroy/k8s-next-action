@@ -65,7 +65,7 @@ No resources found in default namespace.
 
 ```
 
-## Craete a SecretProviderClass
+## Create a SecretProviderClass
 ---
 
 ```
@@ -92,5 +92,51 @@ ubuntu@ip-172-31-22-219:~$ kubectl get secretproviderclass
 NAME                AGE
 vault-csi-example   24s
 
+
+```
+
+## Create a Pod and mount the volume
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ cat demo-pod2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: demo-pod-2
+  name: demo-pod-2
+spec:
+  serviceAccountName: demo-user
+  containers:
+  - image: nginx
+    name: demo-pod-2
+    volumeMounts:
+    - name: app-secrets-store-vol
+      mountPath: "/mnt/app-secrets/"
+      readOnly: true
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+    - name: app-secrets-store-vol
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "vault-csi-example"
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f demo-pod2.yaml
+pod/demo-pod-2 created
+
+ubuntu@ip-172-31-22-219:~$ kubectl exec -it demo-pod-2 -- /bin/sh
+# cd /mnt
+# ls
+app-secrets
+# cd app-secrets
+# ls
+db-credential.txt
+# cat db-credential.txt
+pass123
 
 ```
