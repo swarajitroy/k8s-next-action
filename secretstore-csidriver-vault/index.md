@@ -68,3 +68,29 @@ No resources found in default namespace.
 ## Craete a SecretProviderClass
 ---
 
+```
+ubuntu@ip-172-31-22-219:~$ cat secretproviderclass.yaml
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: vault-csi-example
+spec:
+  provider: vault
+  parameters:
+    vaultAddress: "http://vault.default:8200"
+    roleName: "demo-auth"
+    objects: |
+      - objectName: "db-credential.txt"
+        secretPath: "kv-v2/data/database/config"
+        secretKey: "password"
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f secretproviderclass.yaml
+Warning: secrets-store.csi.x-k8s.io/v1alpha1 is deprecated. Use secrets-store.csi.x-k8s.io/v1 instead.
+secretproviderclass.secrets-store.csi.x-k8s.io/vault-csi-example created
+
+ubuntu@ip-172-31-22-219:~$ kubectl get secretproviderclass
+NAME                AGE
+vault-csi-example   24s
+
+
+```
