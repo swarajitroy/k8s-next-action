@@ -34,3 +34,42 @@ secretstores.external-secrets.io                            2022-04-03T09:46:30Z
 
 ```
 
+## Create an instance of SecretStore CRD
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ echo -n '1234' > ./access-key
+ubuntu@ip-172-31-22-219:~$ echo -n '4567' > ./secret-access-key
+ubuntu@ip-172-31-22-219:~$ kubectl create secret generic awssm-secret --from-file=./access-key  --from-file=./secret-access-key
+secret/awssm-secret created
+
+ubuntu@ip-172-31-22-219:~$ cat secret-store.yaml
+apiVersion: external-secrets.io/v1alpha1
+kind: SecretStore
+metadata:
+  name: my-secret-store
+spec:
+  provider:
+    aws:  # set secretStore provider to AWS.
+      service: SecretsManager # Configure service to be Secrets Manager
+      region: us-east-2   # Region where the secret is.
+      auth:
+        secretRef:
+          accessKeyIDSecretRef:
+            name: awssm-secret # References the secret we created
+            key: access-key
+          secretAccessKeySecretRef:
+            name: awssm-secret
+            key: secret-access-key
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f secret-store.yaml
+secretstore.external-secrets.io/my-secret-store created
+
+ubuntu@ip-172-31-22-219:~$ kubectl get SecretStore
+NAME              AGE     STATUS
+my-secret-store   3m58s   Valid
+
+
+
+```
+
