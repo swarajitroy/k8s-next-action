@@ -73,3 +73,6 @@ my-secret-store   3m58s   Valid
 
 ```
 
+## Create an instance of ExternalSecret CRD
+---
+
