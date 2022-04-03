@@ -93,5 +93,44 @@ ubuntu@ip-172-31-22-219:~$ sudo chmod 755 /usr/local/bin/kubeseal
 ubuntu@ip-172-31-22-219:~$ kubeseal --version
 kubeseal version: v0.16.0
 
+ubuntu@ip-172-31-22-219:~$ kubectl -n kube-system patch svc sealed-secrets-controller --type='json' -p='[{"op": "remove", "path": "/spec/ports/0/name"}, {"op": "replace", "path": "/spec/ports/0/targetPort", "value":8080}]'
+service/sealed-secrets-controller patched
+
+ubuntu@ip-172-31-22-219:~$ kubectl create secret generic secret-name --dry-run=client --from-literal=password=welcome123 -o yaml | kubeseal --controller-name=sealed-secrets-controller --controller-namespace=kube-system  --format yaml > mysealedsecret.yaml
+
+ubuntu@ip-172-31-22-219:~$ cat mysealedsecret.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: secret-name
+  namespace: default
+spec:
+  encryptedData:
+    password: AgAZcTaJmGMFfxalJy9NMBIHrw0q9gKFH18GnfbcMQs2JKc179SmIi1XyG+qJ82U+mnLJV/dohKg7gyeh4EButqayNCsXQGK0JpxkKjh/xsuLE+0sKT7uWBLp6PhOpYm9kt4VCDD7btUgWwByVTq5MHrMS+D95hTqWgxS7q0FFeKB+VVtK/IaolDC4xUBl3yIEpCmWAayuKvk0kCXhNnWlP7Oi0LeOYAHRnFZiGmQzae75opZrZUt1VDZ4qIuQh90s+uobv3f7EnywOu2EI59a13OLuij4Fo2qll1O9Ys+6liSWJIMaWPMLt7jhcoBukdLrphH5JDZbgrGQ9jvgupLAITv6fukn/ZNinLlF+Hd6bK8Cwco80Z8fIGiitmfVeSb4pCYyAuiXda7fiIg7uPlSnqQl+hoFEP2m0BwBrHD7u199fabZgD2ELNqcnHamtp551qT+W4/xs81gnUIyyi+TppOdaNhlrQvSKYCJ+D5fk/nP9Tgo6UpDSreuKlcF0iRhmQ8eq3hsEj74FfAp1pPgsB22bD+8tagKtnNIqsB9e5k87C+AWxM79mukx5QgpWIpBjtxTBKP1oeIrnaQcdSPuT6ybyzKEeFRQnBj2YBm1BWjDxBfe9lvfZtWjrsIvIkXaEIKeZ60HYEp2PnCeddp9rOMjv3TRwV3Ccn/N2xgnI6aU216xq7MbUJgRUYg58Zd8O5nTin5ALjd3
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: secret-name
+      namespace: default
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f mysealedsecret.yaml
+sealedsecret.bitnami.com/secret-name created
+
+ubuntu@ip-172-31-22-219:~$ kubectl get SealedSecret
+NAME          AGE
+secret-name   27s
+
+ubuntu@ip-172-31-22-219:~$ kubectl get secret secret-name
+NAME          TYPE     DATA   AGE
+secret-name   Opaque   1      56s
+
+
+ubuntu@ip-172-31-22-219:~$ kubectl get secret secret-name -o yaml | grep password
+  password: d2VsY29tZTEyMw==
+  
+ubuntu@ip-172-31-22-219:~$ echo 'd2VsY29tZTEyMw==' | base64 -d
+welcome123
 
 ```
