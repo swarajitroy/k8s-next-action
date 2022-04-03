@@ -67,3 +67,31 @@ Both the SealedSecret and generated Secret must have the same name and namespace
 
 
 ```
+
+## Install client side Kubeseal tool
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ sudo wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 -O /usr/local/bin/kubeseal
+--2022-04-03 14:42:36--  https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64
+Resolving github.com (github.com)... 140.82.114.3
+Connecting to github.com (github.com)|140.82.114.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/92702519/38955200-b1e1-11eb-9a84-0e13336d831e?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220403%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220403T144236Z&X-Amz-Expires=300&X-Amz-Signature=ab0941687fdea8e708cb3e3f42093b48419dbe07f43060963a92c3a2b8136171&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=92702519&response-content-disposition=attachment%3B%20filename%3Dkubeseal-linux-amd64&response-content-type=application%2Foctet-stream [following]
+--2022-04-03 14:42:36--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/92702519/38955200-b1e1-11eb-9a84-0e13336d831e?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220403%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220403T144236Z&X-Amz-Expires=300&X-Amz-Signature=ab0941687fdea8e708cb3e3f42093b48419dbe07f43060963a92c3a2b8136171&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=92702519&response-content-disposition=attachment%3B%20filename%3Dkubeseal-linux-amd64&response-content-type=application%2Foctet-stream
+Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.111.133, 185.199.108.133, 185.199.109.133, ...
+Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 35626806 (34M) [application/octet-stream]
+Saving to: ‘/usr/local/bin/kubeseal’
+
+/usr/local/bin/kubeseal                         100%[====================================================================================================>]  33.98M  69.4MB/s    in 0.5s
+
+2022-04-03 14:42:37 (69.4 MB/s) - ‘/usr/local/bin/kubeseal’ saved [35626806/35626806]
+
+ubuntu@ip-172-31-22-219:~$ sudo chmod 755 /usr/local/bin/kubeseal
+ubuntu@ip-172-31-22-219:~$ kubeseal --version
+kubeseal version: v0.16.0
+
+
+```
