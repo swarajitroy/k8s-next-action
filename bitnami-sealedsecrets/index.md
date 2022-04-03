@@ -1,0 +1,2 @@
+# Sealed Secrets with Kubernetes
+---
