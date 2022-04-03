@@ -76,3 +76,38 @@ my-secret-store   3m58s   Valid
 ## Create an instance of ExternalSecret CRD
 ---
 
+```
+ubuntu@ip-172-31-22-219:~$ cat external-secret.yaml
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: awssm-to-k8s-es
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: my-secret-store
+    kind: SecretStore
+  target:
+    name: secret-to-be-created
+    creationPolicy: Owner
+  data:
+  - secretKey: firstname
+    remoteRef:
+      key: prod/apps/myapp
+      property: password
+
+ubuntu@ip-172-31-22-219:~$ kubectl get ExternalSecret
+NAME              STORE             REFRESH INTERVAL   STATUS
+awssm-to-k8s-es   my-secret-store   1m                 SecretSynced
+
+ubuntu@ip-172-31-22-219:~$ kubectl get secrets secret-to-be-created
+NAME                   TYPE     DATA   AGE
+secret-to-be-created   Opaque   1      18m
+
+ubuntu@ip-172-31-22-219:~$ kubectl get secrets secret-to-be-created -o yaml | grep firstname
+  firstname: d2VsY29tZTEyMw==
+
+ubuntu@ip-172-31-22-219:~$ echo 'd2VsY29tZTEyMw==' | base64 -d
+welcome123
+
+```
