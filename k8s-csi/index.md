@@ -2,7 +2,7 @@
 ---
 | ID | Topic | Remarks |
 | ----------- | ----------- | ----------- |
-| A | [Craeet an IAM Policy and User](#a-install-vault) |  IAM Policy and User ||
+| A | [Create an IAM Policy and User](#a-install-vault) |  IAM Policy and User ||
 
 
 ## A. Create an IAM Policy, User  
