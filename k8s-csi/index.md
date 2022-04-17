@@ -38,3 +38,46 @@ aws-secret   Opaque   2      19s
 
 
 ```
+
+## C. Deploy Driver
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+"aws-ebs-csi-driver" has been added to your repositories
+ubuntu@ip-172-31-22-219:~$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "secrets-store-csi-driver" chart repository
+...Successfully got an update from the "sealed-secrets" chart repository
+...Successfully got an update from the "aws-ebs-csi-driver" chart repository
+...Successfully got an update from the "hashicorp" chart repository
+...Successfully got an update from the "external-secrets" chart repository
+Update Complete. ⎈Happy Helming!⎈
+ubuntu@ip-172-31-22-219:~$ helm upgrade --install aws-ebs-csi-driver \
+>     --namespace kube-system \
+>     aws-ebs-csi-driver/aws-ebs-csi-driver
+Release "aws-ebs-csi-driver" does not exist. Installing it now.
+W0417 16:35:03.552472   28640 warnings.go:70] policy/v1beta1 PodDisruptionBudget is deprecated in v1.21+, unavailable in v1.25+; use policy/v1 PodDisruptionBudget
+W0417 16:35:03.617692   28640 warnings.go:70] policy/v1beta1 PodDisruptionBudget is deprecated in v1.21+, unavailable in v1.25+; use policy/v1 PodDisruptionBudget
+NAME: aws-ebs-csi-driver
+LAST DEPLOYED: Sun Apr 17 16:35:03 2022
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+To verify that aws-ebs-csi-driver has started, run:
+
+    kubectl get pod -n kube-system -l "app.kubernetes.io/name=aws-ebs-csi-driver,app.kubernetes.io/instance=aws-ebs-csi-driver"
+
+NOTE: The [CSI Snapshotter](https://github.com/kubernetes-csi/external-snapshotter) controller and CRDs will no longer be installed as part of this chart and moving forward will be a prerequisite of using the snap shotting functionality.
+
+ubuntu@ip-172-31-22-219:~$ kubectl get pod -n kube-system -l "app.kubernetes.io/name=aws-ebs-csi-driver,app.kubernetes.io/instance=aws-ebs-csi-driver"
+NAME                                  READY   STATUS    RESTARTS   AGE
+ebs-csi-controller-79f465b597-wmcmt   5/5     Running   1          63s
+ebs-csi-controller-79f465b597-wnp6g   5/5     Running   1          63s
+ebs-csi-node-7lk9w                    3/3     Running   1          63s
+
+
+
+```
