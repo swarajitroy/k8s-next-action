@@ -85,3 +85,37 @@ ebs.csi.aws.com            true             false            false             <
 
 
 ```
+
+## D. Create storage class
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ cat ebscsi-storageclass.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+provisioner: ebs.csi.aws.com # <-- The same name as the CSIDriver
+metadata:
+  name: swararoy-gp2
+parameters: # <-- parameters for this CSIDriver
+  encrypted: "true"
+  type: gp2
+allowVolumeExpansion: true
+volumeBindingMode: Immediate
+
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f ebscsi-storageclass.yaml
+storageclass.storage.k8s.io/swararoy-gp2 created
+
+ubuntu@ip-172-31-22-219:~$ kubectl describe storageclass swararoy-gp2
+Name:                  swararoy-gp2
+IsDefaultClass:        No
+Annotations:           <none>
+Provisioner:           ebs.csi.aws.com
+Parameters:            encrypted=true,type=gp2
+AllowVolumeExpansion:  True
+MountOptions:          <none>
+ReclaimPolicy:         Delete
+VolumeBindingMode:     Immediate
+Events:                <none>
+
+```
