@@ -78,6 +78,10 @@ ebs-csi-controller-79f465b597-wmcmt   5/5     Running   1          63s
 ebs-csi-controller-79f465b597-wnp6g   5/5     Running   1          63s
 ebs-csi-node-7lk9w                    3/3     Running   1          63s
 
+ubuntu@ip-172-31-22-219:~$ kubectl get CSIDriver
+NAME                       ATTACHREQUIRED   PODINFOONMOUNT   STORAGECAPACITY   TOKENREQUESTS   REQUIRESREPUBLISH   MODES        AGE
+ebs.csi.aws.com            true             false            false             <unset>         false               Persistent   2m19s
+
 
 
 ```
