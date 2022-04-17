@@ -14,3 +14,26 @@ https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-i
 
 and keep the IAM user access and secret key handy with you
 
+## B. Create Secret 
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ cat ebscsisecret.yaml
+apiVersion: v1
+data:
+  access_key: L005cHYxCTU9taWxzeg==
+  key_id: QUtJQpDN0M=
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: aws-secret
+  namespace: kube-system
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f ebscsisecret.yaml
+secret/aws-secret created
+ubuntu@ip-172-31-22-219:~$ kubectl get secret aws-secret -n kube-system
+NAME         TYPE     DATA   AGE
+aws-secret   Opaque   2      19s
+
+
+```
