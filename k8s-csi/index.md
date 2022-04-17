@@ -6,6 +6,7 @@
 | B | [Create Secret wrapping Access and Secret Key](#b-create-secret) || 
 | C | [Deploy CSI Driver](#c-deploy-driver)||
 | D | [Create storage class](#d-create-storage-class)| |
+| E | [Provision Storage](#e-provision-storage)||
 
 
 ## A. Create an IAM Policy, User  
