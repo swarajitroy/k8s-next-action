@@ -119,3 +119,58 @@ VolumeBindingMode:     Immediate
 Events:                <none>
 
 ```
+
+## E. Provision Storage
+---
+
+```
+ubuntu@ip-172-31-22-219:~$ cat swararoy-ebscsi-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: swararoy-ebscsi-pvc
+spec:
+  storageClassName: swararoy-gp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+ubuntu@ip-172-31-22-219:~$ kubectl create -f swararoy-ebscsi-pvc.yaml
+persistentvolumeclaim/swararoy-ebscsi-pvc created
+
+ubuntu@ip-172-31-22-219:~$ kubectl get pvc swararoy-ebscsi-pvc
+NAME                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+swararoy-ebscsi-pvc   Bound    pvc-0fd7583c-dce2-418f-9768-91ef09d2289e   10Gi       RWO            swararoy-gp2   32s
+
+ubuntu@ip-172-31-22-219:~$ kubectl describe pv pvc-0fd7583c-dce2-418f-9768-91ef09d2289e
+Name:              pvc-0fd7583c-dce2-418f-9768-91ef09d2289e
+Labels:            <none>
+Annotations:       pv.kubernetes.io/provisioned-by: ebs.csi.aws.com
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      swararoy-gp2
+Status:            Bound
+Claim:             default/swararoy-ebscsi-pvc
+Reclaim Policy:    Delete
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          10Gi
+Node Affinity:
+  Required Terms:
+    Term 0:        topology.ebs.csi.aws.com/zone in [us-east-2b]
+Message:
+Source:
+    Type:              CSI (a Container Storage Interface (CSI) volume source)
+    Driver:            ebs.csi.aws.com
+    FSType:            ext4
+    VolumeHandle:      vol-0db7c9f23ebcf15be
+    ReadOnly:          false
+    VolumeAttributes:      storage.kubernetes.io/csiProvisionerIdentity=1650213342793-8081-ebs.csi.aws.com
+Events:                <none>
+
+```
+![image](https://user-images.githubusercontent.com/20844803/163725901-e02b8c56-303f-460a-be0a-b784b9735518.png)
+![image](https://user-images.githubusercontent.com/20844803/163726111-34915315-9ced-46f6-b627-11151e0e0534.png)
+
+
